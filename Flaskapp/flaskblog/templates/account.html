@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+    	<div class="media">
+    		<img class="rounded-circle account-img" src="{{ image_file }}">
+    		<div class="media-body">
+    			<h2 class="account-heading">{{ current_user.username }}</h2>
+    			<p class="text-secondary">{{ current_user.email }}</p>
+    			<p> Favourite Actor/Actress :<b> {{ current_user.fav_actor }} </b></p>
+    			<p> Favourite Director :<b> {{ current_user.fav_director }}</b></p>
+    			<p> Favourite Genre : <b>{{ current_user.fav_genre }}</b></p>
+    			<p> Favourite Movie : <b>{{ current_user.fav_movie }}</b></p>
+    		</div>
+    	</div>
+    	<div class="content-section">
+    		<div class="media">
+    			<h2><b>{{ actor_info }}</b></h2>
+    		</div>
+    	</div>
+    	<div class="content-section">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"><strong>Update Account Info</strong></legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.fav_actor.label(class="form-control-label") }}
+                    {{ form.fav_actor(class="form-control form-control-lg") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.fav_genre.label(class="form-control-label") }}
+                    {{ form.fav_genre(class="form-control form-control-lg") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.fav_director.label(class="form-control-label") }}
+                    {{ form.fav_director(class="form-control form-control-lg") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.fav_movie.label(class="form-control-label") }}
+                    {{ form.fav_movie(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </fieldset> 
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+    </div>
+{% endblock content %}
